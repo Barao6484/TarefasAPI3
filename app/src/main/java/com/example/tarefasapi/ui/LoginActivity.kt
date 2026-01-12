@@ -24,6 +24,12 @@ class LoginActivity : AppCompatActivity() {
         val edtUsername = findViewById<EditText>(R.id.edtUsername)
         val edtPassword = findViewById<EditText>(R.id.edtPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val btnGoRegister = findViewById<Button>(R.id.btnGoRegister)
+
+        btnGoRegister.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
 
         // SharedPreferences para guardar estado de login
         val prefs: SharedPreferences =
