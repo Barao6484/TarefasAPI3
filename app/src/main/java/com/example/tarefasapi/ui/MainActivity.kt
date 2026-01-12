@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tarefasapi.R
 import com.example.tarefasapi.viewmodel.TaskViewModel
+import android.widget.Button
+import android.content.Intent
 
 /**
  * MainActivity
@@ -27,6 +29,23 @@ class MainActivity : AppCompatActivity() {
 
         // Liga o layout XML à Activity
         setContentView(R.layout.activity_main)
+
+        //Refência ao botão Logout
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
+
+// SharedPreferences
+        val prefs = getSharedPreferences("auth", MODE_PRIVATE)
+
+// Clique no botão Logout
+        btnLogout.setOnClickListener {
+
+            // Apaga o estado de login
+            prefs.edit().putBoolean("logged", false).apply()
+
+            // Volta para o LoginActivity
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
         // Referência ao RecyclerView definido no XML
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerTasks)
