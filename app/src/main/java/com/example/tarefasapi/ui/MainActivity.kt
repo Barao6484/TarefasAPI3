@@ -27,47 +27,60 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        /**
+         * SharedPreferences
+         * Usado para verificar se o utilizador está logado
+         */
+        val prefs = getSharedPreferences("auth", MODE_PRIVATE)
+
+        // 🔐 CONTROLO DE ACESSO
+        // Se NÃO estiver logado, volta imediatamente para o Login
+        if (!prefs.getBoolean("logged", false)) {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         // Liga o layout XML à Activity
         setContentView(R.layout.activity_main)
 
-        //Refência ao botão Logout
+        /**
+         * Botão Logout
+         * Apaga o estado de login e volta ao LoginActivity
+         */
         val btnLogout = findViewById<Button>(R.id.btnLogout)
-
-// SharedPreferences
-        val prefs = getSharedPreferences("auth", MODE_PRIVATE)
-
-// Clique no botão Logout
         btnLogout.setOnClickListener {
 
-            // Apaga o estado de login
-            prefs.edit().putBoolean("logged", false).apply()
+            // Remove o estado de login
+            prefs.edit()
+                .putBoolean("logged", false)
+                .apply()
 
-            // Volta para o LoginActivity
+            // Volta para o Login
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
-        // Referência ao RecyclerView definido no XML
+        /**
+         * RecyclerView
+         * Mostra a lista de tarefas
+         */
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerTasks)
-
-        // Define o layout da lista (vertical)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        // Cria o adapter da lista
+        // Adapter da lista
         val adapter = TaskAdapter()
         recyclerView.adapter = adapter
 
         /**
-         * Observa a lista de tarefas vinda do ViewModel.
-         * Sempre que os dados mudarem:
-         * - O adapter é atualizado
-         * - A interface é automaticamente redesenhada
+         * Observa os dados do ViewModel
+         * Sempre que a lista muda, o RecyclerView atualiza
          */
         viewModel.tasks.observe(this) { tasks ->
             adapter.updateTasks(tasks)
         }
 
-        // Inicia o carregamento das tarefas da API
+        // Carrega tarefas da API
         viewModel.loadTasks()
     }
 }

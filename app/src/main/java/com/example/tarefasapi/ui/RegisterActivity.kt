@@ -51,7 +51,7 @@ class RegisterActivity : AppCompatActivity() {
 
             // Guarda os dados do utilizador
             prefs.edit()
-                .putString("username", username)
+                .putString("email", username) // username aqui é o email
                 .putString("password", password)
                 .apply()
 
