@@ -19,13 +19,14 @@
             android:layout_height="wrap_content"
             android:text="Logout" />
 
-        <!-- Botão Adicionar Tarefa -->
         <Button
-            android:id="@+id/btnAddTask"
+            android:id="@+id/btnAbout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Adicionar tarefa"
+            android:text="Sobre"
             android:layout_marginStart="16dp" />
+
+
     </LinearLayout>
 
     <!-- Lista de tarefas -->
