@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tarefasapi.R
 import com.example.tarefasapi.viewmodel.TaskViewModel
-
+import android.widget.Toast
 /**
  * MainActivity
  *
@@ -68,6 +68,21 @@ class MainActivity : AppCompatActivity() {
         // Observa tarefas
         viewModel.tasks.observe(this) { tasks ->
             adapter.updateTasks(tasks)
+        }
+
+        // Observa mensagens de erro provenientes do ViewModel.
+        viewModel.error.observe(this) { errorMessage ->
+
+            // Verifica se existe uma mensagem de erro.
+            if (errorMessage != null) {
+
+                // Mostra a mensagem ao utilizador.
+                Toast.makeText(
+                    this,
+                    errorMessage,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
         }
 
         // Carrega da API
