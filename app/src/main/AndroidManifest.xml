@@ -30,6 +30,11 @@
             android:name=".ui.LoginActivity"
             android:exported="false" />
 
+        <!-- CRIAR TAREFA -->
+        <activity
+            android:name=".ui.CreateTaskActivity"
+            android:exported="false" />
+
         <!-- RECUPERAR PASSWORD -->
         <activity
             android:name=".ui.ForgotPasswordActivity"
