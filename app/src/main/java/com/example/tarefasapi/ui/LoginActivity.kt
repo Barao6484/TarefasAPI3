@@ -45,13 +45,25 @@ class LoginActivity : AppCompatActivity() {
         val edtPassword = findViewById<EditText>(R.id.edtPassword)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val btnGoRegister = findViewById<Button>(R.id.btnGoRegister)
-
+        val btnForgotPassword = findViewById<Button>(R.id.btnForgotPassword)
         /**
          * Botão "Criar Conta"
          * Abre o ecrã de registo
          */
         btnGoRegister.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        /**
+         * Botão Recuperar Conta
+         *
+         * Abre o ecrã para alterar a password.
+         */
+        btnForgotPassword.setOnClickListener {
+
+            startActivity(
+                Intent(this, ForgotPasswordActivity::class.java)
+            )
         }
 
         /**
